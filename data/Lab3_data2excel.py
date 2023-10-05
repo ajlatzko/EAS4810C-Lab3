@@ -20,8 +20,8 @@ velocity_data = {}
 for filename in os.listdir(cal_folder):
     if filename.endswith('.txt'):
         parts = filename.split(' ')  # Split the filename into parts
-        if len(parts) == 3:  # Check if the filename has three parts (pitot measurement)
-            pressure = parts[1]  # Extract the pressure from the filename
+        if len(parts) == 4:  # Check if the filename has four parts (pitot measurement)
+            pressure = parts[2]  # Extract the pressure from the filename
             pressure = pressure.replace(',', '.')
             trial_name = f'{pressure} q'
             txt_file_path = os.path.join(cal_folder, filename)  # Full path to the .txt file
@@ -34,8 +34,8 @@ for filename in os.listdir(cal_folder):
                 pressure_data[pressure].append(data)
             else:
                 pressure_data[pressure] = [data]
-        elif len(parts) == 4:  # Check if the filename has four parts (velocity measurement)
-            pressure = parts[2]  # Extract the pressure from the filename
+        elif len(parts) == 5:  # Check if the filename has five parts (velocity measurement)
+            pressure = parts[3]  # Extract the pressure from the filename
             pressure = pressure.replace(',', '.')
             trial_name = f'{pressure} vel'
             txt_file_path = os.path.join(cal_folder, filename)  # Full path to the .txt file
@@ -73,10 +73,23 @@ position_data = {}
 # Loop through each .txt file in the folder
 for filename in os.listdir(expr_folder):
     if filename.endswith('.txt'):
-        parts = filename.split('_')  # Split the filename into parts
-        if len(parts) == 3:  # Check if the filename has three parts
+        parts = filename.split(' ')  # Split the filename into parts
+        if len(parts) == 4:  # Check if the filename has four parts
             position = parts[2]  # Extract the position from the filename
-            position = position.split('.')[0]
+            position = position.replace(',','.')
+            trial_name = f'{position} cm'
+            txt_file_path = os.path.join(expr_folder, filename)  # Full path to the .txt file
+            
+            # Read the .txt file into a DataFrame
+            data = pd.read_csv(txt_file_path, names=['voltage'], header=None, delimiter='\t', usecols=[1])
+            
+            # Store the data in the position_data dictionary
+            if position in position_data:
+                position_data[position].append(data)
+            else:
+                position_data[position] = [data]
+        if len(parts) == 7:  # Check if the filename has seven parts (top and bottom measurements)
+            position = parts[2]  # Extract the position from the filename
             trial_name = f'{position}'
             txt_file_path = os.path.join(expr_folder, filename)  # Full path to the .txt file
             
