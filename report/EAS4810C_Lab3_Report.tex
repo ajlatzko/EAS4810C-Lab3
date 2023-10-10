@@ -1,0 +1,353 @@
+\documentclass[journal,letterpaper]{IEEEtran}
+\usepackage[letterpaper, left=0.65in, right=0.65in, bottom=0.7in, top=0.7in]{geometry}
+\usepackage{stix}
+\usepackage{siunitx}
+\usepackage[version=4]{mhchem}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[none]{hyphenat}
+\usepackage[hidelinks]{hyperref}
+\usepackage{import}
+\usepackage{transparent}
+\usepackage{microtype}
+
+\graphicspath{ {./figures/} }
+
+\pgfplotsset{compat=1.18}
+
+\setlength{\columnsep}{0.2in}
+\setlength{\columnwidth}{3.5in}
+
+\newlength\fheight
+\newlength\fwidth
+\setlength\fwidth{3.25in}
+\setlength\fheight{0.7\fwidth}
+
+\newcommand{\incfig}[1]{%
+    \centering
+    \def\svgwidth{3.5in}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\renewcommand{\arraystretch}{1.2}
+
+\sisetup{per-mode = symbol,
+         inter-unit-product = \ensuremath{ { } \cdot { } },
+         number-unit-product = \text{ },
+         group-digits = false}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rhead{\thepage}
+\lhead{Section 11832 Lab 3}
+
+\begin{document}
+\title{Hot Wire Measurements Over a Cylinder}
+
+\author{\IEEEauthorblockN{\LARGE{Borg, Auston J. \quad Lam, Brandon H. \quad Latzko, Alexander J. \\}}
+\IEEEauthorblockA{
+Section 11832 \quad October 10, 2023}
+}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+cylinder, hot wire anemometer, Kármán vortex street, wind tunnel
+\end{IEEEkeywords}
+
+
+\section{Introduction}
+
+
+\IEEEPARstart{W}{hen} studying the aerodynamics of objects, an item of particular interest is the flow pattern around the object.
+Analysis of the flow pattern can provide useful information about the object's flight characteristics such as the behavior of lift and drag.
+When a bluff body is placed in steady uniform flow, the presence of the body disrupts the streamlines and typically causes flow separation behind the body, resulting in a turbulent wake.
+The fluid velocity in the wake region can be characterized by a mean fluid velocity and perturbations that act in a cyclical manner.
+These perturbations can be attributed to vortices in the Kármán vortex street and have an associated frequency, $f$, known as the Strouhal frequency that is associated with the Reynold's number of the flow~\cite{Strouhal}.
+This experiment had the objective of using a calibrated hot wire anemometer to determine the mean velocity profile and turbulent velocity profile in the wake of a cylinder placed in the test section of the wind tunnel.
+Additionally, the velocity spectra at different points in the test section of the wind tunnel was found to determine the vortex shedding frequency and corresponding Strouhal number.
+
+To record the fluid velocity at different points in the test section of the wind tunnel, a hot wire anemometer was used.
+The hot wire anemometer functions by heating a small and thin wire placed in the test section.
+As the air flows over the hot wire, the air attempts to cool down the hot wire anemometer.
+The hot wire anemometer consequently increases the voltage applied to the wire to maintain a constant temperature.
+The hot wire anemometer was calibrated with known freestream velocities to establish a relationship between the measured voltage and the local fluid velocity.
+
+With a calibrated hot wire anemometer, the local fluid velocity could be determined along different points in the wake of the blunt cylinder.
+First, the mean velocity profile in the wake of the cylinder was created.
+Previous experiments with the wind tunnel have shown that the velocity profile of an unoccupied test section is approximately uniform.
+Analysis of the mean velocity profile with the presence of the cylinder can demonstrate how blunt bodies disrupt the flow in the test section.
+Furthermore, previous research has shown that the amount of turbulence is directly correlated to the variance of the fluid velocity in the wake region behind the cylinder.
+With statistical samples of the fluid velocity, the standard deviation of the fluid velocities in the test section were plotted to obtain an understanding of the turbulent velocity profile.
+Finally, spectrum analysis of the local fluid velocities at different locations should yield a dominant non-zero frequency in the flow.
+This dominant frequency was determined to be the Strouhal frequency, from which the Strouhal number, $Sr$, of the flow could be calculated using equation~\eqref{eq:Strouhal}, where $f$ is the Strouhal frequency, $D$ is the body diameter, and $U_\infty$ is the freestream velocity~\cite{Strouhal}.
+\begin{equation} \label{eq:Strouhal}
+    Sr = \frac{fD}{U_\infty}
+\end{equation}
+This calculated Strouhal number was then compared with existing literature to best characterize the wake. 
+
+\begin{figure}[H]
+    \centering
+    %\includegraphics[width=2.7in]{transducerPort}
+    \caption{Resulting wake behind a cylindrical body at various Reynold's numbers.}
+    \label{fig:wake}
+\end{figure}
+
+\section{Procedure}
+
+\subsection{Calibrating the Hot Wire Anemometer}
+
+Before commencing the calibration of the hot wire anemometer, the ambient pressure, relative humidity, and ambient temperature were recorded.
+The pressure transducer was calibrated to inches of water in the negative direction using the transducer's digital readout and a water barometer. 
+To calibrate the hot wire anemometer, the test section was emptied of all obstructions.
+The hot wire anemometer was then moved to the middle of the test section height and lengthwise.
+The calibration was taken over ten different velocities.
+The range of velocities measured was $7.54 \pm \qty{0.04}{\m\per\s}$ to $25.19 \pm \qty{0.04}{\m\per\s}$ linearly scaled.
+The wind tunnel was set to the corresponding static pressure for each velocity using the tunnel calibration coefficient determined from the first experiment.
+At each calibration point the voltage data from the anemometer and the pressure data from the pressure transducer was measured over 10 seconds at a sampling rate of \qty{2000}{\hertz}.
+
+\subsection{Measuring the Velocity Profile}
+
+A circular cylinder of diameter 0.75 inches was placed into the test section.
+The cylinder spanned across the test section width of 12 inches as seen in figure~\ref{fig:cylinder}.
+The hot wire anemometer was moved to the back of the test section and was initially positioned to be \qty{8}{\cm} below the centerline of the cylinder.
+At a Reynolds number of 21000 (add uncertainty), the height of the anemometer was increased by \qty{1}{\cm} for each anemometer voltage measurement.
+The height of the anemometer was increased to a maximum height of 8 centimeters above the centerline of the cylinder.
+The voltage data for the 17 data points were taken over 10 seconds at a sampling rate of 2000 Hz.
+After collecting the 17 data points, the anemometer voltage was taken at the top and bottom of the cylinder for the same sampling rate and time as the previous measurements.
+
+\begin{figure}[H]
+    \centering
+    %\includegraphics[width=2.7in]{transducerPort}
+    \caption{Test section configuration for velocity profile measurement.}
+    \label{fig:cylinder}
+\end{figure}
+
+
+\section{Results}
+
+The ambient pressure, $P_\text{amb}$, of the room was measured using a wall-mounted barometer.
+The temperature, $T$, and the relative humidity, $\varphi$, of the room was measured using a digital thermometer and hygrometer placed next to the test section.
+
+\begin{table}[H]
+    \centering
+    \caption{Initial Conditions}
+    \begin{tabular}{ccc}
+    \toprule
+    Parameter & Value & Uncertainty ($\pm$) \\ \midrule \midrule
+    $P_\text{amb}$ & \qty{760.11}{mm\ce{Hg}} & \qty{0.02}{mm\ce{Hg}} \\
+    $T$ & \qty{22.0}{\celsius} & \qty{0.1}{\celsius} \\
+    $\varphi$ & 50\% & 1\% \\
+    \end{tabular}
+    \label{tab:atmCond}
+\end{table}
+
+The static gauge pressures measured using the pressure transducer were converted into the corresponding fluid velocities.
+These velocities were then plotted against the voltages measured by the hot wire anemometer used during the calibration procedure in figure~\ref{fig:cal}.
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Hot wire anemometer calibration curve.}
+    \label{fig:cal}
+\end{figure}
+
+To obtain the mean velocity profile for the flow over a circular cylinder, the velocity at multiple heights in the wind tunnel were gathered.
+The 17 mean velocities were plotted against their corresponding position in the wind tunnel as seen in figure~\ref{fig:profile}.
+The position marked as 0 corresponds to the centerline of the cylinder.
+Additionally, the standard deviation of each velocity measurement was plotted against the position the velocity was measured at (Fig.~\ref{fig:deviation}).
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Velocity profile behind a cylinder in uniform flow.}
+    \label{fig:profile}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{The standard deviation of the velocities measured in the test section.}
+    \label{fig:deviation}
+\end{figure}
+
+
+\section{Discussion}
+
+\subsection{Hot Wire Anemometer Calibration}
+
+From the ten calibration data points, a fourth-order polynomial was fit between the fluid velocity and the measured voltage.
+With the polynomial fit having a correlation coefficient of 0.9999, this indicated that the calibration curve fit well with the experimental data \eqref{eq:poly}.
+With the calibration curve, fluid velocities could be interpolated using the fourth-order polynomial and a measured voltage. 
+
+\begin{equation} \label{eq:poly}
+    v = 0.0058V^4 - 0.894V^3 + 11.23V^2 - 34.95V + 35.97
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Calibration graph for voltage velocity relation.}
+    \label{fig:calCurve}
+\end{figure}
+
+The bounds of the fluid velocities used in the calibration were a minimum velocity of $7.54 \pm \qty{0.04}{\m\per\s}$ and a maximum velocity of $25.19 \pm \qty{0.04}{\m\per\s}$.
+These bounds were selected so that during the determination of the velocity profile in the wake of the cylinder, the resulting fluid velocities were within the interpolation range of the calibration curve.
+This allowed the construction of the velocity profile without extrapolation of data, minimizing systemic bias.
+The uncertainty for the interpolated fluid velocities was obtained by using the greatest possible percent error from a combination of the uncertainty in the calibration fluid velocities and the random uncertainty in the hot wire anemometer itself.
+See Appendix A for further details.
+
+\subsection{Mean Fluid Velocity Profile}
+
+The hot wire anemometer was placed throughout the height of the test section and the recorded voltages were interpolated to find the corresponding fluid velocities using the calibration curve.
+The mean fluid velocity was then plotted against the position of the hot wire anemometer in the test section as seen in Figure~\ref{fig:profile}.
+There was a decrease in the mean fluid velocity in the wake of the cylinder with the flow reaching a minimum velocity directly behind the centerline of the cylinder.
+This was likely due to the presence of the cylinder disrupting the streamlines behind the cylinder.
+The mean fluid velocity when outside of the wake of the cylinder equalized around the intended freestream velocity of $17.5 \pm \qty{0.04}{\m\per\s}$.
+Due to the relatively low uncertainty in the interpolated velocities, it can be judged that the shape of the mean velocity profile of the fluid flow in the test section of the wind tunnel generally matched with what was expected from turbulent flow theory~\cite{lab3doc}.
+
+\subsection{Turbulent Fluid Velocity Profile}
+
+The standard deviation of the fluid velocities interpolated from the voltage of the hot wire anemometer was plotted against the position of the hot wire anemometer in the test section as seen in figure~\ref{fig:deviation}.
+The standard deviation of the fluid velocity is directly correlated to the turbulence of the flow~\cite{turbulence}.
+The turbulent fluid velocity profile indicates that the turbulence reached a maximum value when the hot wire anemometer was directly in line with the centerline of the cylinder.
+The turbulence then diminished as the hot wire anemometer was moved further from the centerline of the cylinder and was minimum when outside of the wake flow of the cylinder.
+The presence of a non-zero value for the standard deviation when outside of the wake flow could be attributed to the natural random uncertainty from recording voltages with the hot wire anemometer.
+These findings matched previous literature that described how the flow behaves in the wake of a blunt cylinder~\cite{turbulence}.
+
+\subsection{Velocity Spectra}
+
+To investigate the nature of the vortex shedding, a fast Fourier transform was used to calculate the discrete Fourier transform of the interpolated fluid velocities from the hot wire anemometer. Figures~\ref{fig:freq2}, \ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show the resulting velocity spectra of the data.
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Velocity spectra when the hot wire anemometer was in-line with the center of the cylinder.}
+    \label{fig:freq2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Velocity spectra when the hot wire anemometer was in-line with the top of the cylinder.}
+    \label{fig:freq3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Velocity spectra when the hot wire anemometer was in the flow wake region.}
+    \label{fig:freq4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Velocity spectra when the hot wire anemometer was outside of the flow wake region.}
+    \label{fig:freq5}
+\end{figure}
+
+
+The velocity spectra from figures~\ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show a clear peak in the frequency domain at \qty{156.3}{\hertz}.
+Using this frequency value with equation~\eqref{eq:Strouhal} yields a Strouhal number of 0.18.
+Previous research suggests that, for a Reynold's number of 21,000, the expected Strouhal number is 0.20 for flow around a circular cylinder~\cite{Strouhal}.
+Measures were put in place to minimize sources of error with the determination of the velocity spectra such as using a high sampling frequency.
+With a sampling frequency of \qty{2000}{\hertz}, the associated Nyquist frequency was \qty{2000}{\hertz}, which was much greater than the expected Strouhal frequency.
+This helped to prevent the disruptive effects of aliasing and misidentification of the key frequency in the velocity spectra.
+Despite best efforts, the experiment still had a percent error of $-10$\%.
+One potential source of error could be that the experiment assumed that the cylinder was a perfectly smooth blunt body.
+Existing research has suggested that as the surface roughness of a bare cylinder increases, the Strouhal number decreases~\cite{roughness}.
+This could have accounted for the lower-than-expected experimental value for the Strouhal number.
+It can also be seen from the velocity spectra that the magnitude of the variance decreases as the hot wire anemometer gets further from the centerline of the cylinder.
+This indicates that the flow becomes less turbulent as the hot wire anemometer leaves the wake region, like the pattern seen when developing the turbulent velocity profile.
+
+
+
+\section{Conclusion}
+
+
+Conclusion
+
+
+\section*{Appendix A: Uncertainty Calculations}
+
+
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.7}
+    \centering
+    \caption{Summary of Measurement Uncertainties}
+    \begin{tabular}{cccc}
+    \toprule
+    Parameter & Symbol & Justification & Uncertainty ($\pm$) \\ \midrule \midrule
+    Temperature & $\mu T$ & Digital & \qty{0.1}{\celsius} \\
+    Humidity & $\mu \varphi$ & Digital & 1\% \\
+    Ambient Pressure & $\mu P_\text{amb}$ & Barometer & \qty{0.02}{\mm} \\
+    \makecell{Static Pressure \\ Difference} & $\mu \Delta P$ & \makecell{95\% Conf. Int.} & Variable \\
+    Voltage & $\mu V$ & 95\% Conf. Int. & Variable \\
+    Dynamic Pressure & $\mu q$ & RSS & Variable \\
+    Saturation Pressure & $\mu P_g$ & RSS & \qty{16}{\pascal} \\
+    Density & $\mu \rho$ & RSS & \qty{0.004}{\kg\per\m\cubed} \\
+    Calibration Velocity & $\mu v_c$ & RSS & $\sim \qty{0.04}{\m\per\s}$ \\
+    Interpolated Velocity & $\mu v$ & \makecell{Largest \\ Percent Error} & 0.5\% \\ \bottomrule
+    \end{tabular}
+    \label{tab:uncertainty}
+\end{table}
+
+First, the systemic bias in the reading of the transducer pressures and the voltage readings was accounted for by zeroing the respective values in the Labview.vi program.
+The random uncertainty for each reading was then obtained by using a 95\% confidence interval with a normal distribution.
+Because a sample size of 20,000 was used for each reading, it was determined to be sufficiently large that the sample distribution approached the normal distribution according to the central limit theorem~\cite{MoMLecture}.
+A $z^*$ value of 1.96 was used for the calculation of the 95\% confidence interval~\cite{MoMLecture}.
+The margin of error then served as the uncertainty, where $\mu X$ is the margin of error for an arbitrary measurement, $S_x$ is the sample standard deviation, and $n$ is the number of samples~\eqref{eq:conf}.
+
+\begin{equation} \label{eq:conf}
+    \mu X = z^* \frac{S_x}{\sqrt{n}}
+\end{equation}
+
+The uncertainties for the calculated dynamic pressures, $q$, were then calculated using the RSS (Root Sum Squared) method~\cite{MoMLecture} where $\Delta P$ was the change in stagnation pressure and $k$ was the tunnel calibration coefficient that was determined in the first lab experiment.
+
+\begin{equation} \label{eq:uq}
+    \mu q = \left[\left(\mu \Delta P \frac{\partial q}{\partial \Delta P}\right)^2 + \left(\mu k \frac{\partial q}{\partial \Delta k}\right)^2\right]^{1/2}
+\end{equation}
+
+The uncertainty for the saturation pressure, $P_g$, was determined using error propagation theory~\cite{errorprop}, where $T$ is the ambient temperature~\eqref{eq:uPsat}.
+
+\begin{equation} \label{eq:uPsat}
+    \mu P_g = \mu T \frac{\partial P_g}{\partial T}
+\end{equation}
+
+The uncertainty for the fluid density, $\rho$, was calculated using the RSS method~\cite{MoMLecture}, where $P$ is the ambient pressure, $T$ is the ambient temperature, $\varphi$ is the relative humidity, and $P_g$ is the saturation pressure~\eqref{eq:uRho}.
+
+\begin{equation} \label{eq:uRho}
+    \resizebox{227pt}{!}{$\displaystyle{\mu \rho = \left[\left(\mu P \frac{\partial \rho}{\partial P}\right)^2 + \left(\mu T \frac{\partial \rho}{\partial T}\right)^2 + \left(\mu \varphi \frac{\partial \rho}{\partial \varphi}\right)^2 + \left(\mu P_g \frac{\partial \rho}{\partial P_g}\right)^2\right]^{1/2}}$}
+\end{equation}
+
+The uncertainty for the fluid velocity used in the calibration of the hot wire anemometer, $v_c$, was then calculated using the RSS method~\cite{MoMLecture}, where $q$ is the dynamic pressure, $\rho$ is the fluid density along with incorpoating the uncertainty from the fourth-order polynomial fit using the voltages from the hot wire anemometer, $V$~\eqref{eq:uV}.
+
+\begin{equation} \label{eq:uV}
+    \mu v_c = \left[\left(\mu q \frac{\partial v_c}{\partial q}\right)^2 + \left(\mu \rho \frac{\partial v_c}{\partial \rho}\right)^2 + \left(\mu V \frac{\partial v_c}{\partial V}\right)^2\right]^{1/2}
+\end{equation}
+
+Then, to obtain the uncertainty for the interpolated fluid velocities, $v$, the greatest percent error from the calibration of the hot wire anemometer was used to simulate the worst-case deviation for all the interpolated velocities using the calibration curve. 
+
+\begin{thebibliography}{99}
+    \bibitem{MoMLecture} Ridgeway, S., ``MOM\_lab Uncertainty basics w tension,'' \textit{University of Florida} [PowerPoint slides], URL: \url{https://ufl.instructure.com/courses/447927/files/65674680}, 2022.
+    \bibitem{errorprop} Ku, H. H., ``Notes on the Use of Propagation of Error Formulas'', \textit{Journal of Research of the National Bureau of Standards}, Vol. 70C, No. 4, 27 May 1966, pp. 263--273.
+    \bibitem{roughness} placeholder
+    \bibitem{Strouhal} placeholder
+\end{thebibliography}
+
+\end{document}
