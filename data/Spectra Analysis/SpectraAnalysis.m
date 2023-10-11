@@ -12,6 +12,7 @@ N = 1000;
 Fs = 2000;
 %Generate frequency domain limits
 f = linspace(0, Fs/2, N/2);
+f = (f*0.01905)/17.67;
 filenames = {'centerlineSpectra.tex';
     'topSpectra.tex';
     'insideSpectra.tex';
@@ -55,8 +56,9 @@ for kk = 1:4
     %Plot data
     figure(kk);
     plot(f,amp(kk,1:500),'b');
-    xlabel('Frequency (Hz)')
+    xlabel('Strouhal Number')
     ylabel('Variance (m^2/s^2)')
+    xlim([0 1])
     grid on;
     box off;
     matlab2tikz(filenames{kk},'height','\fheight','width','\fwidth')

@@ -89,11 +89,7 @@ When a bluff body is placed in steady uniform flow, the presence of the body dis
 The fluid velocity in the wake region can be characterized by a mean fluid velocity and perturbations that act in a cyclical manner.
 These perturbations can be attributed to vortex shedding, called the Kármán vortex street, and have an associated frequency, $f$. To better quantify the frequency of this vortex shedding, a number called the Strouhal number relates the freestream velocity to the frequency and diameter of the object~\cite{Strouhal}.
 This experiment had the objective of using a hot wire anemometer to determine the mean velocity profile and turbulent velocity profile in the wake of a smooth cylinder placed in the test section of a wind tunnel.
-Additionally, the velocity spectra were found to at different points in the test section of the wind tunnel determine the vortex shedding frequency and corresponding Strouhal number, as shown by~\eqref{eq:Strouhal}.
-
-\begin{equation} \label{eq:Strouhal}
-    Sr = \frac{fD}{U_\infty}
-\end{equation}
+Additionally, the velocity spectra were found to at different points in the test section of the wind tunnel determine the vortex shedding frequency and corresponding Strouhal number.
 
 The assumptions used to calculate the data in this report are that the fluid is incompressible, there is zero pressure gradient in the $x$-direction, and the flow is steady.
 To record the fluid velocity at different points in the test section of the wind tunnel, a hot wire anemometer was used.
@@ -124,7 +120,10 @@ This drag force can then be non-dimensionalized using~\eqref{eq:Coeff} by dividi
 Furthermore, previous research has shown that the amount of turbulence is directly correlated to the variance of the fluid velocity in the wake region behind the cylinder~\cite{Strouhal}.
 With statistical samples of the fluid velocity, the standard deviation of the fluid velocities in the test section were plotted to obtain an understanding of the turbulent velocity profile.
 Finally, spectrum analysis of the local fluid velocities at different locations should yield a dominant non-zero frequency in the flow.
-This dominant frequency was determined to be the Strouhal frequency, from which the Strouhal number, Sr, of the flow could be calculated using~\eqref{eq:Strouhal}, where $f$ is the Strouhal frequency, $D$ is the body diameter, and $U_\infty$ is the freestream velocity~\cite{Strouhal}.
+This dominant frequency was determined to be the Strouhal frequency, from which the Strouhal number, $Sr$, of the flow could be calculated using~\eqref{eq:Strouhal}, where $f$ is the Strouhal frequency, $D$ is the body diameter, and $U_\infty$ is the freestream velocity~\cite{Strouhal}.
+\begin{equation} \label{eq:Strouhal}
+    Sr = \frac{fD}{U_\infty}
+\end{equation}
 The speed chosen to obtain the data necessary for the Strouhal number was chosen based on the predicted uncertainty in the calculation and the predicted behavior of the wake as seen in Fig.~\ref{fig:wake}.
 The calculated Strouhal number was then compared with existing literature to best characterize the wake based on Fig.~\ref{fig:strouhal}. 
 
@@ -328,7 +327,7 @@ This would allow the coefficient to better match the expected theoretical coeffi
 
 \subsection{Velocity Spectra}
 
-To investigate the nature of the vortex shedding, a fast Fourier transform was used to calculate the discrete Fourier transform of the interpolated fluid velocities from the hot wire anemometer. Figures~\ref{fig:freq2}, \ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show the resulting velocity spectra of the data.
+To investigate the nature of the vortex shedding, a fast Fourier transform was used to calculate the discrete Fourier transform of the interpolated fluid velocities from the hot wire anemometer. Fig.~\ref{fig:freq2}, \ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show the resulting velocity spectra of the data.
 
 \begin{figure}[H]
     \centering
@@ -376,7 +375,7 @@ This indicates that the flow becomes less turbulent as the hot wire anemometer l
 \section{Conclusion}
 
 
-It was found that the mean velocity in the wake of the cylinder decreases toward the centerline, consistent with aerodynamic theory~\cite{labDoc}.
+It was found that the mean velocity in the wake of the cylinder decreases toward the centerline, consistent with aerodynamic theory~\cite{lab3doc}.
 By using a hot wire anemometer, fluctuations in the velocity of the air due to turbulence were also measured.
 This allowed the standard deviation of the velocity to be calculated, allowing the turbulence in the wake of the cylinder to be quantified.
 It was found that the standard deviation of the velocity reached a maximum value at the centerline of the cylinder.
@@ -486,16 +485,17 @@ The uncertainty in the drag coefficient, $C_D$, was calculated using the RSS met
 \end{equation}
 
 \begin{thebibliography}{99}
-    \bibitem{MoMLecture} Ridgeway, S., ``MOM\_lab Uncertainty basics w tension,'' \textit{University of Florida} [PowerPoint slides], URL: \url{https://ufl.instructure.com/courses/447927/files/65674680}, 2022.
-    \bibitem{errorprop} Ku, H. H., ``Notes on the Use of Propagation of Error Formulas'', \textit{Journal of Research of the National Bureau of Standards}, Vol. 70C, No. 4, 27 May 1966, pp. 263--273.
-    \bibitem{roughness} Sun, C., Zhou, T., An, H., Zhu, H., Cheng, L., ``Effect of surface roughness heights on circular cylinder wakes,'' \textit{22nd Australasian Fluid Mechanics Conference}, The University of Queensland, Brisbane, Australia, 2020.
     \bibitem{Strouhal} Yue, D. K. P., ``Vortex Shedding and Vortex Induced Vibrations,'' Lecture Notes for 13.021: Marine Hydrodynamics, Massachusetts Institute of Technology, URL: \url{http://web.mit.edu/13.021/demos/lectures/lecture15.pdf}, 2004.
     \bibitem{Lab1} Borg., A., Lam., B., Latzko, A., ``Wind Tunnel Calibration for Prediction of Testing Conditions,'' \textit{University of Florida}, 2023.
     \bibitem{DragData} Bruschi, G., Nishioka, T., Tsang, K., Wang, R., ``Drag Coefficient of a Cylinder: A Comparison of Analytical Methods,'' \textit{University of California San Diego}, 2003.
-    \bibitem{HeatTrans} Bergman, T. L., and Lavine, A. S., ``Appendix A: Thermophysical Properties of Matter,'' \textit{Fundamentals of Heat and Mass Transfer}, Wiley, Hoboken, NJ, 2017, p. 911.
     \bibitem{StrouhalPlot} Smits, A. J., ``Viscous External Flows,'' \textit{A Physical Introduction to Fluid Mechanics}, Princeton Univ., Princeton, NJ, 2013, p. 183.
-    \bibitem{labDoc} Abbitt, J. D., ``Lab 3 - Cylinder - hot-wire-rev2,'' \textit{University of Florida E-Learning} [PDF], URL: \url{https://ufl.instructure.com/courses/480244/files/77543920}, 2023.
+    \bibitem{lab3doc} Abbitt, J. D., ``Lab 3 - Cylinder - hot-wire-rev2,'' \textit{University of Florida E-Learning} [PDF], URL: \url{https://ufl.instructure.com/courses/480244/files/77543920}, 2023.
+    \bibitem{turbulence} Environmental Protection Agency, ``Minimum value for lateral turbulence (aka, minimum $\sigma_v$)'', URL: \url{https://www.epa.gov/sites/default/files/2021-01/documents/lowwind_min_sigma-v_white_paper.pdf}.
     \bibitem{dragRef} Anderson, J. D., ``Fundamentals of Inviscid, Incompressible Flow,'' \textit{Fundamentals of Aerodynamics}, McGraw-Hill, New York, NY, 2017, pp. 294-295.
+    \bibitem{roughness} Sun, C., Zhou, T., An, H., Zhu, H., Cheng, L., ``Effect of surface roughness heights on circular cylinder wakes,'' \textit{22nd Australasian Fluid Mechanics Conference}, The University of Queensland, Brisbane, Australia, 2020.
+    \bibitem{HeatTrans} Bergman, T. L., and Lavine, A. S., ``Appendix A: Thermophysical Properties of Matter,'' \textit{Fundamentals of Heat and Mass Transfer}, Wiley, Hoboken, NJ, 2017, p. 911.
+    \bibitem{MoMLecture} Ridgeway, S., ``MOM\_lab Uncertainty basics w tension,'' \textit{University of Florida} [PowerPoint slides], URL: \url{https://ufl.instructure.com/courses/447927/files/65674680}, 2022.
+    \bibitem{errorprop} Ku, H. H., ``Notes on the Use of Propagation of Error Formulas'', \textit{Journal of Research of the National Bureau of Standards}, Vol. 70C, No. 4, 27 May 1966, pp. 263--273.
 \end{thebibliography}
 
 \end{document}
