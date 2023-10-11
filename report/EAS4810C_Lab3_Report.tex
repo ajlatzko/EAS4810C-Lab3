@@ -42,7 +42,10 @@
 \sisetup{per-mode = symbol,
          inter-unit-product = \ensuremath{ { } \cdot { } },
          number-unit-product = \text{ },
-         group-digits = false}
+         group-digits = false,
+         detect-weight = true,
+         detect-inline-weight = math,
+         detect-display-math = true}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -62,7 +65,14 @@ Section 11832 \quad October 10, 2023}
 \thispagestyle{empty}
 
 \begin{abstract}
-
+This study presented a method of analyzing the effects of a cylinder in steady incompressible flow.
+In addition to this, the Kármán vortex street was evaluated using four velocity power spectra to quantify the effect of the cylinder.
+First, the hot wire anemometer was calibrated using ten data points while being placed in the middle of an empty test section at ten different fluid velocities.
+Then, with the \qty{0.75}{in} diameter cylinder placed in the test section, the velocity of the flow was measured using the anemometer at seventeen different heights at the back of the test section.
+The velocity at the centerline, top, and bottom of the cylinder were also measured.
+The velocity data gathered at the center of the cylinder, top of the cylinder, edge of the wake, and outside the wake were then used to calculate a Strouhal number of $\bm{0.18 \pm 0.004}$ using the shedding frequency found through the generation of velocity power spectra.
+It was found that the Strouhal number was only accurate when the velocity was not measured at the centerline of the cylinder due to the fluctuations in velocities being canceled at the center.
+Using the previously generated velocity profile and numerical integration, the drag and drag coefficient on the cylinder was found to be $\bm{0.927 \pm }\mathbf{\qty{0.070}{\newton}}$ and $\bm{0.856 \pm 0.065}$, respectively, in a flow of Reynolds number $\bm{21000 \pm 938}$.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -77,58 +87,82 @@ cylinder, hot wire anemometer, Kármán vortex street, wind tunnel
 Analysis of the flow pattern can provide useful information about the object's flight characteristics such as the behavior of lift and drag.
 When a bluff body is placed in steady uniform flow, the presence of the body disrupts the streamlines and typically causes flow separation behind the body, resulting in a turbulent wake.
 The fluid velocity in the wake region can be characterized by a mean fluid velocity and perturbations that act in a cyclical manner.
-These perturbations can be attributed to vortices in the Kármán vortex street and have an associated frequency, $f$, known as the Strouhal frequency that is associated with the Reynold's number of the flow~\cite{Strouhal}.
+These perturbations can be attributed to vortices in the Kármán vortex street and have an associated frequency, $f$, known as the Strouhal frequency that is associated with the Reynolds number of the flow~\cite{Strouhal}.
 This experiment had the objective of using a calibrated hot wire anemometer to determine the mean velocity profile and turbulent velocity profile in the wake of a cylinder placed in the test section of the wind tunnel.
-Additionally, the velocity spectra at different points in the test section of the wind tunnel was found to determine the vortex shedding frequency and corresponding Strouhal number.
+Additionally, the velocity spectra at different points in the test section of the wind tunnel was found to determine the vortex shedding frequency and corresponding Strouhal number, as shown by~\eqref{eq:Strouhal}.
 
-To record the fluid velocity at different points in the test section of the wind tunnel, a hot wire anemometer was used.
-The hot wire anemometer functions by heating a small and thin wire placed in the test section.
-As the air flows over the hot wire, the air attempts to cool down the hot wire anemometer.
-The hot wire anemometer consequently increases the voltage applied to the wire to maintain a constant temperature.
-The hot wire anemometer was calibrated with known freestream velocities to establish a relationship between the measured voltage and the local fluid velocity.
-
-With a calibrated hot wire anemometer, the local fluid velocity could be determined along different points in the wake of the blunt cylinder.
-First, the mean velocity profile in the wake of the cylinder was created.
-Previous experiments with the wind tunnel have shown that the velocity profile of an unoccupied test section is approximately uniform.
-Analysis of the mean velocity profile with the presence of the cylinder can demonstrate how blunt bodies disrupt the flow in the test section.
-Furthermore, previous research has shown that the amount of turbulence is directly correlated to the variance of the fluid velocity in the wake region behind the cylinder.
-With statistical samples of the fluid velocity, the standard deviation of the fluid velocities in the test section were plotted to obtain an understanding of the turbulent velocity profile.
-Finally, spectrum analysis of the local fluid velocities at different locations should yield a dominant non-zero frequency in the flow.
-This dominant frequency was determined to be the Strouhal frequency, from which the Strouhal number, $Sr$, of the flow could be calculated using equation~\eqref{eq:Strouhal}, where $f$ is the Strouhal frequency, $D$ is the body diameter, and $U_\infty$ is the freestream velocity~\cite{Strouhal}.
 \begin{equation} \label{eq:Strouhal}
     Sr = \frac{fD}{U_\infty}
 \end{equation}
-This calculated Strouhal number was then compared with existing literature to best characterize the wake. 
+
+The assumptions used to calculate the data in this report are that the fluid is incompressible, there is zero pressure gradient in the $x$-direction, and the flow is steady.
+To record the fluid velocity at different points in the test section of the wind tunnel, a hot wire anemometer was used.
+The hot wire anemometer functions by heating a thin wire placed in the test section.
+As the air flows over the hot wire, convection heat transfer occurs and cools the wire.
+Since the resistance of the wire is a function of the temperature of the wire, the cooling of the wire changes its resistance.
+This results in a change in voltage that can be measured.
+A hot wire anemometer was chosen for this experiment because it has a low time constant, meaning it is more sensitive to rapid velocity changes compared to other means of measuring air velocity.
+This enables the capture of the Kármán vortex street.
+The hot wire anemometer was calibrated with known freestream velocities to establish a fourth-order polynomial relationship between the measured voltage and the local fluid velocity.
+
+With the calibrated hot wire anemometer, the local fluid velocity could be determined along different points in the wake of the cylinder.
+First, the mean velocity profile in the wake of the cylinder was obtained.
+Previous experiments with the wind tunnel have shown that the velocity profile of an unoccupied test section is approximately uniform except for at the walls of the wind tunnel~\cite{Lab1}.
+Analysis of the mean velocity profile with the presence of the cylinder can demonstrate how bluff bodies disrupt the flow in the test section.
+Disruptions in the flow would cause a drag force which can be measured with momentum conservation and the velocity data gathered for the velocity profile.
+Equation~\eqref{eq:Drag} uses the momentum balance of the test section to calculate the total drag caused by the cylinder.
+This integral was calculated through numerical integration where $q$ is the dynamic pressure, $U_2 (y)$ is the velocity at height $y$, $U_\infty$ is the freestream velocity, and $h$ is the height of the velocity profile~\cite{DragData}.
+This drag force can then be non-dimensionalized using~\eqref{eq:Coeff} by dividing by its dynamic pressure $q$ and characteristic length $L$.
+
+\begin{equation} \label{eq:Drag}
+    F_D = q\int_{0}^{h} \frac{U_2 (y)}{U_\infty}2 \left(1 - \frac{U_2 (y)}{U_\infty}\right)\,dy
+\end{equation}
+\begin{equation} \label{eq:Coeff}
+    C_D = \frac{F_D}{qL}
+\end{equation}
+
+Furthermore, previous research has shown that the amount of turbulence is directly correlated to the variance of the fluid velocity in the wake region behind the cylinder~\cite{Strouhal}.
+With statistical samples of the fluid velocity, the standard deviation of the fluid velocities in the test section were plotted to obtain an understanding of the turbulent velocity profile.
+Finally, spectrum analysis of the local fluid velocities at different locations should yield a dominant non-zero frequency in the flow.
+This dominant frequency was determined to be the Strouhal frequency, from which the Strouhal number, Sr, of the flow could be calculated using~\eqref{eq:Strouhal}, where $f$ is the Strouhal frequency, $D$ is the body diameter, and $U_\infty$ is the freestream velocity~\cite{Strouhal}.
+The speed chosen to obtain the data necessary for the Strouhal number was chosen based on the predicted uncertainty in the calculation and the predicted behavior of the wake as seen in Fig.~\ref{fig:wake}.
+The calculated Strouhal number was then compared with existing literature to best characterize the wake based on Fig.~\ref{fig:strouhal}. 
 
 \begin{figure}[H]
     \centering
     %\includegraphics[width=2.7in]{transducerPort}
-    \caption{Resulting wake behind a cylindrical body at various Reynold's numbers.}
+    \caption{Resulting wake behind a cylindrical body at various Reynolds numbers.}
     \label{fig:wake}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    %\includegraphics[width=2.7in]{transducerPort}
+    \caption{Dimensionless shedding frequency (Strouhal number) as a function of Reynolds number~\cite{StrouhalPlot}.}
+    \label{fig:strouhal}
 \end{figure}
 
 \section{Procedure}
 
 \subsection{Calibrating the Hot Wire Anemometer}
 
-Before commencing the calibration of the hot wire anemometer, the ambient pressure, relative humidity, and ambient temperature were recorded.
-The pressure transducer was calibrated to inches of water in the negative direction using the transducer's digital readout and a water barometer. 
+Prior to the calibration of the hot wire anemometer, the ambient pressure, relative humidity, and ambient temperature were recorded.
+The pressure transducer was calibrated to inches of water in the negative direction using the transducer's digital readout and a water manometer.
 To calibrate the hot wire anemometer, the test section was emptied of all obstructions.
 The hot wire anemometer was then moved to the middle of the test section height and lengthwise.
-The calibration was taken over ten different velocities.
-The range of velocities measured was $7.54 \pm \qty{0.04}{\m\per\s}$ to $25.19 \pm \qty{0.04}{\m\per\s}$ linearly scaled.
+The calibration was taken over ten linearly spaced velocities.
+The range of velocities measured was $7.54 \pm \qty{0.04}{\m\per\s}$ to $25.19 \pm \qty{0.04}{\m\per\s}$.
 The wind tunnel was set to the corresponding static pressure for each velocity using the tunnel calibration coefficient determined from the first experiment.
-At each calibration point the voltage data from the anemometer and the pressure data from the pressure transducer was measured over 10 seconds at a sampling rate of \qty{2000}{\hertz}.
+At each calibration point, the voltage data from the anemometer and the pressure data from the pressure transducer were measured over 10 seconds at a sampling rate of \qty{2000}{\hertz}.
 
 \subsection{Measuring the Velocity Profile}
 
-A circular cylinder of diameter 0.75 inches was placed into the test section.
-The cylinder spanned across the test section width of 12 inches as seen in figure~\ref{fig:cylinder}.
+A smooth brass cylinder of diameter 0.75 inches was placed into the test section.
+The cylinder spanned across the test section width of 12 inches as seen in Fig.~\ref{fig:cylinder}.
 The hot wire anemometer was moved to the back of the test section and was initially positioned to be \qty{8}{\cm} below the centerline of the cylinder.
-At a Reynolds number of 21000 (add uncertainty), the height of the anemometer was increased by \qty{1}{\cm} for each anemometer voltage measurement.
-The height of the anemometer was increased to a maximum height of 8 centimeters above the centerline of the cylinder.
-The voltage data for the 17 data points were taken over 10 seconds at a sampling rate of 2000 Hz.
-After collecting the 17 data points, the anemometer voltage was taken at the top and bottom of the cylinder for the same sampling rate and time as the previous measurements.
+At a Reynolds number of $21000 \pm 938$, the height of the anemometer was increased by \qty{1}{\cm} for each anemometer voltage measurement.
+The height of the anemometer was increased to a maximum height of \qty{8}{\cm} above the centerline of the cylinder.
+The voltage data for the seventeen data points were taken over 10 seconds at a sampling rate of \qty{2000}{\hertz}.
+After collecting the seventeen data points, the anemometer voltage was taken at the top and bottom of the cylinder for the same sampling rate and time as the previous measurements.
 
 \begin{figure}[H]
     \centering
@@ -142,22 +176,23 @@ After collecting the 17 data points, the anemometer voltage was taken at the top
 
 The ambient pressure, $P_\text{amb}$, of the room was measured using a wall-mounted barometer.
 The temperature, $T$, and the relative humidity, $\varphi$, of the room was measured using a digital thermometer and hygrometer placed next to the test section.
+The measured atmospheric conditions are summarized in Table~\ref{tab:atmCond}.
 
 \begin{table}[H]
     \centering
-    \caption{Initial Conditions}
+    \caption{Atmospheric Conditions}
     \begin{tabular}{ccc}
     \toprule
     Parameter & Value & Uncertainty ($\pm$) \\ \midrule \midrule
-    $P_\text{amb}$ & \qty{760.11}{mm\ce{Hg}} & \qty{0.02}{mm\ce{Hg}} \\
-    $T$ & \qty{22.0}{\celsius} & \qty{0.1}{\celsius} \\
-    $\varphi$ & 50\% & 1\% \\
+    $P_\text{amb}$ & \qty{762.60}{mm\ce{Hg}} & \qty{0.02}{mm\ce{Hg}} \\
+    $T$ & \qty{21.9}{\celsius} & \qty{0.1}{\celsius} \\
+    $\varphi$ & 51\% & 1\% \\ \bottomrule
     \end{tabular}
     \label{tab:atmCond}
 \end{table}
 
 The static gauge pressures measured using the pressure transducer were converted into the corresponding fluid velocities.
-These velocities were then plotted against the voltages measured by the hot wire anemometer used during the calibration procedure in figure~\ref{fig:cal}.
+The pressures measures, where $P_a$ is ambient pressure and $P_{ts}$ is test section pressure, are plotted against the voltages measured by the hot wire anemometer used during the calibration procedure in Fig.~\ref{fig:cal}.
 
 \begin{figure}[H]
     \centering
@@ -166,33 +201,59 @@ These velocities were then plotted against the voltages measured by the hot wire
     \label{fig:cal}
 \end{figure}
 
-To obtain the mean velocity profile for the flow over a circular cylinder, the velocity at multiple heights in the wind tunnel were gathered.
-The 17 mean velocities were plotted against their corresponding position in the wind tunnel as seen in figure~\ref{fig:profile}.
-The position marked as 0 corresponds to the centerline of the cylinder.
-Additionally, the standard deviation of each velocity measurement was plotted against the position the velocity was measured at (Fig.~\ref{fig:deviation}).
+The hot wire anemometer was then used to create a sample of 20000 data points at each of the sixteen positions behind the cylinder in the test section.
+The mean of each voltage at each centimeter above and below was calculated and then tabulated with their respective uncertainties in Table~\ref{tab:voltage}.
+A positive height is above the cylinder and a negative height is below the cylinder.
+The mean voltage at the centerline, top and bottom of the cylinder were also taken with their values and uncertainties in Table~\ref{tab:voltages}.
 
-\begin{figure}[H]
+\begin{table}[H]
     \centering
-    %\input{figures/calibration.tex}
-    \caption{Velocity profile behind a cylinder in uniform flow.}
-    \label{fig:profile}
-\end{figure}
+    \caption{Voltage Profile}
+    \begin{tabular}{cc}
+    \toprule
+    Height $h$ (cm) & Voltage $V$ (V) \\ \midrule \midrule
+    $8.00 \pm 0.05 $ & $3.780 \pm 0.0002$ \\
+    $7.00 \pm 0.05 $ & $3.777 \pm 0.0002$ \\
+    $6.00 \pm 0.05 $ & $3.777 \pm 0.0004$ \\
+    $5.00 \pm 0.05 $ & $3.768 \pm 0.0008$ \\
+    $4.00 \pm 0.05 $ & $3.747 \pm 0.0012$ \\
+    $3.00 \pm 0.05 $ & $3.721 \pm 0.0017$ \\
+    $2.00 \pm 0.05 $ & $3.674 \pm 0.0020$ \\
+    $1.00 \pm 0.05 $ & $3.577 \pm 0.0027$ \\
+    $-1.00 \pm 0.05$ & $3.541 \pm 0.0028$ \\
+    $-2.00 \pm 0.05$ & $3.646 \pm 0.0024$ \\
+    $-3.00 \pm 0.05$ & $3.717 \pm 0.0018$ \\
+    $-4.00 \pm 0.05$ & $3.742 \pm 0.0014$ \\
+    $-5.00 \pm 0.05$ & $3.764 \pm 0.0010$ \\
+    $-6.00 \pm 0.05$ & $3.780 \pm 0.0005$ \\
+    $-7.00 \pm 0.05$ & $3.787 \pm 0.0003$ \\
+    $-8.00 \pm 0.05$ & $3.785 \pm 0.0002$ \\ \bottomrule
+    \end{tabular}
+    \label{tab:voltage}
+\end{table}
 
-\begin{figure}[H]
+\begin{table}[H]
     \centering
-    %\input{figures/calibration.tex}
-    \caption{The standard deviation of the velocities measured in the test section.}
-    \label{fig:deviation}
-\end{figure}
+    \caption{Voltage Profile (Cont.)}
+    \begin{tabular}{ccc}
+    \toprule
+    Location & Height $h$ (cm) & Voltage $V$ (V) \\ \midrule \midrule
+    Centerline & $0.00 \pm 0.05$ & $3.495 \pm 0.0030$ \\
+    Top of Cylinder & $0.90 \pm 0.05$ & $3.532 \pm 0.0029$ \\
+    Bottom of Cylinder & $-0.90 \pm 0.05$ & $3.583 \pm 0.0027$ \\ \bottomrule
+    \end{tabular}
+    \label{tab:voltages}
+\end{table}
 
 
 \section{Discussion}
 
 \subsection{Hot Wire Anemometer Calibration}
 
-From the ten calibration data points, a fourth-order polynomial was fit between the fluid velocity and the measured voltage.
-With the polynomial fit having a correlation coefficient of 0.9999, this indicated that the calibration curve fit well with the experimental data \eqref{eq:poly}.
-With the calibration curve, fluid velocities could be interpolated using the fourth-order polynomial and a measured voltage. 
+From the ten calibration data points, a fourth-order polynomial was fit between the fluid velocity and the measured voltage (Fig.~\ref{fig:calCurve}).
+This polynomial is shown by~\eqref{eq:poly}.
+With the polynomial fit having a correlation coefficient of 0.9999, this indicated that the calibration curve fit well with the experimental data.
+With the calibration curve, fluid velocities could be interpolated using the fourth-order polynomial and a measured voltage.
 
 \begin{equation} \label{eq:poly}
     v = 0.0058V^4 - 0.894V^3 + 11.23V^2 - 34.95V + 35.97
@@ -214,20 +275,44 @@ See Appendix A for further details.
 \subsection{Mean Fluid Velocity Profile}
 
 The hot wire anemometer was placed throughout the height of the test section and the recorded voltages were interpolated to find the corresponding fluid velocities using the calibration curve.
-The mean fluid velocity was then plotted against the position of the hot wire anemometer in the test section as seen in Figure~\ref{fig:profile}.
+The mean fluid velocity was then plotted against the position of the hot wire anemometer in the test section as seen in Fig.~\ref{fig:profile}.
 There was a decrease in the mean fluid velocity in the wake of the cylinder with the flow reaching a minimum velocity directly behind the centerline of the cylinder.
 This was likely due to the presence of the cylinder disrupting the streamlines behind the cylinder.
-The mean fluid velocity when outside of the wake of the cylinder equalized around the intended freestream velocity of $17.5 \pm \qty{0.04}{\m\per\s}$.
+The mean fluid velocity when outside of the wake of the cylinder equalized around the intended freestream velocity of $17.67 \pm \qty{0.04}{\m\per\s}$.
 Due to the relatively low uncertainty in the interpolated velocities, it can be judged that the shape of the mean velocity profile of the fluid flow in the test section of the wind tunnel generally matched with what was expected from turbulent flow theory~\cite{lab3doc}.
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{Velocity profile behind a cylinder in uniform flow.}
+    \label{fig:profile}
+\end{figure}
 
 \subsection{Turbulent Fluid Velocity Profile}
 
-The standard deviation of the fluid velocities interpolated from the voltage of the hot wire anemometer was plotted against the position of the hot wire anemometer in the test section as seen in figure~\ref{fig:deviation}.
+The standard deviation of the fluid velocities interpolated from the voltage of the hot wire anemometer was plotted against the position of the hot wire anemometer in the test section as seen in Fig.~\ref{fig:deviation}.
 The standard deviation of the fluid velocity is directly correlated to the turbulence of the flow~\cite{turbulence}.
 The turbulent fluid velocity profile indicates that the turbulence reached a maximum value when the hot wire anemometer was directly in line with the centerline of the cylinder.
 The turbulence then diminished as the hot wire anemometer was moved further from the centerline of the cylinder and was minimum when outside of the wake flow of the cylinder.
 The presence of a non-zero value for the standard deviation when outside of the wake flow could be attributed to the natural random uncertainty from recording voltages with the hot wire anemometer.
-These findings matched previous literature that described how the flow behaves in the wake of a blunt cylinder~\cite{turbulence}.
+These findings matched previous literature that described how the flow behaves in the wake of a smooth cylinder~\cite{turbulence}.
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/calibration.tex}
+    \caption{The standard deviation of the velocities measured in the test section.}
+    \label{fig:deviation}
+\end{figure}
+
+\subsection{Drag Coefficient Calculation}
+
+The drag of the cylinder was calculated through the conservation of momentum of a control volume and a numerical integration approximation.
+Using~\eqref{eq:Drag} to numerically integrate over the entire profile, a drag force was found and is tabulated in Table~\ref{tab:Drag}.
+This drag force could then be converted into a coefficient as seen in Table~\ref{tab:Drag} using~\eqref{eq:Coeff}.
+The calculated coefficient of drag comes close to the theoretical coefficient of drag for a cylinder of 1~\cite{dragRef}.
+The error seen between the calculated coefficient and theoretical coefficient could be because of the resolution of the velocity profile.
+By taking more data points, the numerical integration that was performed would be more accurate.
+This would allow the coefficient to better match the expected theoretical coefficient of drag more closely.
 
 \subsection{Velocity Spectra}
 
@@ -261,15 +346,14 @@ To investigate the nature of the vortex shedding, a fast Fourier transform was u
     \label{fig:freq5}
 \end{figure}
 
-
-The velocity spectra from figures~\ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show a clear peak in the frequency domain at \qty{156.3}{\hertz}.
-Using this frequency value with equation~\eqref{eq:Strouhal} yields a Strouhal number of 0.18.
-Previous research suggests that, for a Reynold's number of 21,000, the expected Strouhal number is 0.20 for flow around a circular cylinder~\cite{Strouhal}.
-Measures were put in place to minimize sources of error with the determination of the velocity spectra such as using a high sampling frequency.
-With a sampling frequency of \qty{2000}{\hertz}, the associated Nyquist frequency was \qty{2000}{\hertz}, which was much greater than the expected Strouhal frequency.
+The velocity spectra from Fig.~\ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show a clear peak in the frequency domain at \qty{156.3}{\hertz}.
+Using this frequency value with~\eqref{eq:Strouhal} yields a Strouhal number of 0.18.
+Previous research suggests that, for a Reynolds number of $21000 \pm 938$, the expected Strouhal number is 0.20 for flow around a smooth cylinder~\cite{Strouhal}.
+Measures were put in place to minimize sources of error with the determination of the velocity spectra, such as using a high sampling frequency.
+With a sampling frequency of \qty{2000}{\hertz}, the associated Nyquist frequency was \qty{1000}{\hertz}, which was much greater than the expected Strouhal frequency.
 This helped to prevent the disruptive effects of aliasing and misidentification of the key frequency in the velocity spectra.
 Despite best efforts, the experiment still had a percent error of $-10$\%.
-One potential source of error could be that the experiment assumed that the cylinder was a perfectly smooth blunt body.
+One potential source of error could be that the experiment assumed that the cylinder was perfectly smooth.
 Existing research has suggested that as the surface roughness of a bare cylinder increases, the Strouhal number decreases~\cite{roughness}.
 This could have accounted for the lower-than-expected experimental value for the Strouhal number.
 It can also be seen from the velocity spectra that the magnitude of the variance decreases as the hot wire anemometer gets further from the centerline of the cylinder.
@@ -280,7 +364,21 @@ This indicates that the flow becomes less turbulent as the hot wire anemometer l
 \section{Conclusion}
 
 
-Conclusion
+It was found that the mean velocity in the wake of the cylinder decreases toward the centerline, consistent with aerodynamic theory~\cite{labDoc}.
+By using a hot wire anemometer, fluctuations in the velocity of the air due to turbulence were also measured.
+This allowed the standard deviation of the velocity to be calculated, allowing the turbulence in the wake of the cylinder to be quantified.
+It was found that the standard deviation of the velocity reached a maximum value at the centerline of the cylinder.
+Velocity power spectra at four different locations behind the cylinder were also gathered.
+This enabled the capture of the resulting Kármán vortex street and the quantification of its frequency.
+Using this frequency, a Strouhal number of 0.18 was calculated.
+This is reasonably close to the expected Strouhal number of 0.20 for a smooth cylinder, however, it is not within the uncertainty of the calculated Strouhal number.
+This is possibly due to the assumption that the cylinder was perfectly smooth.
+Surface roughness of the cylinder used in this study could have accounted for the discrepancy between the expected and calculated Strouhal numbers.
+In future experiments, it could be useful to quantify the surface roughness of the cylinder that is used to calculate a more accurate Strouhal number.
+The drag force and drag coefficient for the cylinder was also calculated.
+The drag coefficient was found to be $0.856 \pm 0.065$, which is less than the expected value of 1~\cite{dragRef}.
+This could be attributed to the granularity of the velocity profile measurements causing systemic error in the numerical integration.
+For a more accurate drag coefficient, more measurements of the velocity profile at different heights should be taken.
 
 
 \section*{Appendix A: Uncertainty Calculations}
@@ -302,52 +400,90 @@ Conclusion
     Saturation Pressure & $\mu P_g$ & RSS & \qty{16}{\pascal} \\
     Density & $\mu \rho$ & RSS & \qty{0.004}{\kg\per\m\cubed} \\
     Calibration Velocity & $\mu v_c$ & RSS & $\sim \qty{0.04}{\m\per\s}$ \\
-    Interpolated Velocity & $\mu v$ & \makecell{Largest \\ Percent Error} & 0.5\% \\ \bottomrule
+    Interpolated Velocity & $\mu v$ & \makecell{Largest \\ Percent Error} & 0.5\% \\
+    Freestream Velocity & $\mu U_\infty$ & RSS & \qty{0.04}{\m\per\s} \\
+    Characteristic Length & $\mu L$ & Ruler & \qty{0.5}{\mm} \\
+    Kinematic Viscosity & $\mu \nu$ & \cite{HeatTrans} & \qty{2e-9}{\m\squared\per\s} \\
+    Reynolds Number & $\mu Re$ & RSS & 938 \\
+    Height & $\mu h$ & Ruler & \qty{0.05}{\cm} \\
+    Instantaneous Velocity & $\mu U_2$ & 95\% Conf. Int. & Variable \\
+    Drag Force & $\mu F_D$ & RSS & \qty{0.070}{\newton} \\
+    Coefficient of Drag & $\mu v$ & RSS & 0.065 \\ \bottomrule
     \end{tabular}
     \label{tab:uncertainty}
 \end{table}
 
+The uncertainties for each measured value are summarized in Table~\ref{tab:uncertainty}.
 First, the systemic bias in the reading of the transducer pressures and the voltage readings was accounted for by zeroing the respective values in the Labview.vi program.
 The random uncertainty for each reading was then obtained by using a 95\% confidence interval with a normal distribution.
-Because a sample size of 20,000 was used for each reading, it was determined to be sufficiently large that the sample distribution approached the normal distribution according to the central limit theorem~\cite{MoMLecture}.
+Because a sample size of 20000 was used for each reading, it was determined to be sufficiently large that the sample distribution approached the normal distribution according to the central limit theorem~\cite{MoMLecture}.
 A $z^*$ value of 1.96 was used for the calculation of the 95\% confidence interval~\cite{MoMLecture}.
-The margin of error then served as the uncertainty, where $\mu X$ is the margin of error for an arbitrary measurement, $S_x$ is the sample standard deviation, and $n$ is the number of samples~\eqref{eq:conf}.
+The margin of error then served as the uncertainty as seen in~\eqref{eq:conf}, where $\mu X$ is the margin of error for an arbitrary measurement, $S_x$ is the sample standard deviation, and $n$ is the number of samples~\cite{MoMLecture}.
 
 \begin{equation} \label{eq:conf}
     \mu X = z^* \frac{S_x}{\sqrt{n}}
 \end{equation}
 
-The uncertainties for the calculated dynamic pressures, $q$, were then calculated using the RSS (Root Sum Squared) method~\cite{MoMLecture} where $\Delta P$ was the change in stagnation pressure and $k$ was the tunnel calibration coefficient that was determined in the first lab experiment.
+The uncertainties in the calculated dynamic pressures, $q$, were then calculated using the root sum squared (RSS) method as seen in~\eqref{eq:uq}, where $\Delta P$ is the change in stagnation pressure and $k$ is the tunnel calibration coefficient that was determined in the first lab experiment~\cite{MoMLecture}.
 
 \begin{equation} \label{eq:uq}
-    \mu q = \left[\left(\mu \Delta P \frac{\partial q}{\partial \Delta P}\right)^2 + \left(\mu k \frac{\partial q}{\partial \Delta k}\right)^2\right]^{1/2}
+    \mu q = \left[\left(\mu \Delta P \frac{\partial q}{\partial \Delta P}\right)^2 + \left(\mu k \frac{\partial q}{\partial k}\right)^2\right]^{1/2}
 \end{equation}
 
-The uncertainty for the saturation pressure, $P_g$, was determined using error propagation theory~\cite{errorprop}, where $T$ is the ambient temperature~\eqref{eq:uPsat}.
+The uncertainty in the saturation pressure, $P_g$, was determined using error propagation theory as seen in~\eqref{eq:uPsat}, where $T$ is the ambient temperature~\cite{errorprop}.
 
 \begin{equation} \label{eq:uPsat}
     \mu P_g = \mu T \frac{\partial P_g}{\partial T}
 \end{equation}
 
-The uncertainty for the fluid density, $\rho$, was calculated using the RSS method~\cite{MoMLecture}, where $P$ is the ambient pressure, $T$ is the ambient temperature, $\varphi$ is the relative humidity, and $P_g$ is the saturation pressure~\eqref{eq:uRho}.
+The uncertainty in the fluid density, $\rho$, was calculated using the RSS method as seen in~\eqref{eq:uRho}, where $P$ is the ambient pressure, $T$ is the ambient temperature, $\varphi$ is the relative humidity, and $P_g$ is the saturation pressure~\cite{MoMLecture}.
 
 \begin{equation} \label{eq:uRho}
     \resizebox{227pt}{!}{$\displaystyle{\mu \rho = \left[\left(\mu P \frac{\partial \rho}{\partial P}\right)^2 + \left(\mu T \frac{\partial \rho}{\partial T}\right)^2 + \left(\mu \varphi \frac{\partial \rho}{\partial \varphi}\right)^2 + \left(\mu P_g \frac{\partial \rho}{\partial P_g}\right)^2\right]^{1/2}}$}
 \end{equation}
 
-The uncertainty for the fluid velocity used in the calibration of the hot wire anemometer, $v_c$, was then calculated using the RSS method~\cite{MoMLecture}, where $q$ is the dynamic pressure, $\rho$ is the fluid density along with incorpoating the uncertainty from the fourth-order polynomial fit using the voltages from the hot wire anemometer, $V$~\eqref{eq:uV}.
+The uncertainty for the fluid velocity used in the calibration of the hot wire anemometer, $v_c$, was then calculated using the RSS method as seen in~\eqref{eq:uv}, where $q$ is the dynamic pressure, $\rho$ is the fluid density, and $V$ is voltage from the hot wire anemometer obtained from the fourth-order polynomial fit~\cite{MoMLecture}.
 
-\begin{equation} \label{eq:uV}
+\begin{equation} \label{eq:uv}
     \mu v_c = \left[\left(\mu q \frac{\partial v_c}{\partial q}\right)^2 + \left(\mu \rho \frac{\partial v_c}{\partial \rho}\right)^2 + \left(\mu V \frac{\partial v_c}{\partial V}\right)^2\right]^{1/2}
 \end{equation}
 
-Then, to obtain the uncertainty for the interpolated fluid velocities, $v$, the greatest percent error from the calibration of the hot wire anemometer was used to simulate the worst-case deviation for all the interpolated velocities using the calibration curve. 
+Then, to obtain the uncertainty for the interpolated fluid velocities, $v$, the greatest percent error from the calibration of the hot wire anemometer was used to simulate the worst-case deviation for all the interpolated velocities using the calibration curve.
+
+The uncertainty for the Reynolds number, $Re$, was calculated using the RSS method as seen in~\eqref{eq:uRe}, where $U_\infty$ is the freestream velocity, $\nu$ is the dynamic viscosity of the fluid, and $L$ is the characteristic length~\cite{HeatTrans}.
+
+\begin{equation} \label{eq:uRe}
+    \resizebox{227pt}{!}{$\displaystyle{\mu Re = \left[\left(\mu \nu \frac{\partial Re}{\partial \nu}\right)^2 + \left(\mu U_\infty \frac{\partial Re}{\partial U_\infty}\right)^2 + \left(\mu L \frac{\partial Re}{\partial L}\right)^2\right]^{1/2}}$}
+\end{equation}
+
+To obtain the uncertainties for the instantaneous velocity, a 95\% confidence interval was used.
+The sample size of the data was larger than 1000, so a normal distribution was used.
+For a 95\% confidence interval, the corresponding $z^*$ value of 1.96 was used~\cite{MoMLecture}.
+Using~\eqref{eq:conf}, the uncertainty in each velocity was found.
+
+The uncertainty in the drag force, $F_D$, was calculated using the RSS method as seen in~\eqref{eq:uFD}, where $q$ is the dynamic pressure, $h$ is the height of the velocity profile, $U_2 (y)$ is the instantaneous velocity, and $U_\infty$ is the freestream velocity.
+
+\begin{equation} \label{eq:uFD}
+    \resizebox{227pt}{!}{$\displaystyle{\mu F_D = \left[\left(\mu U_\infty \frac{\partial F_D}{\partial U_\infty}\right)^2 + \left(\mu q \frac{\partial F_D}{\partial q}\right)^2 + \left(\mu h \frac{\partial F_D}{\partial h}\right)^2 + \left(\mu U_2 (y) \frac{\partial F_D}{\partial U_2 (y)}\right)^2\right]^{1/2}}$}
+\end{equation}
+
+The uncertainty in the drag coefficient, $C_D$, was calculated using the RSS method as seen in~\eqref{eq:uCD}, where $q$ is the dynamic pressure, $F_D$ is the drag force, and $L$ is the characteristic length.
+
+\begin{equation} \label{eq:uCD}
+    \resizebox{227pt}{!}{$\displaystyle{\mu C_D = \left[\left(\mu F_D \frac{\partial C_D}{\partial F_D}\right)^2 + \left(\mu q \frac{\partial C_D}{\partial q}\right)^2 + \left(\mu L \frac{\partial C_D}{\partial L}\right)^2\right]^{1/2}}$}
+\end{equation}
 
 \begin{thebibliography}{99}
     \bibitem{MoMLecture} Ridgeway, S., ``MOM\_lab Uncertainty basics w tension,'' \textit{University of Florida} [PowerPoint slides], URL: \url{https://ufl.instructure.com/courses/447927/files/65674680}, 2022.
     \bibitem{errorprop} Ku, H. H., ``Notes on the Use of Propagation of Error Formulas'', \textit{Journal of Research of the National Bureau of Standards}, Vol. 70C, No. 4, 27 May 1966, pp. 263--273.
-    \bibitem{roughness} placeholder
-    \bibitem{Strouhal} placeholder
+    \bibitem{roughness} Sun, C., Zhou, T., An, H., Zhu, H., Cheng, L., ``Effect of surface roughness heights on circular cylinder wakes,'' \textit{22nd Australasian Fluid Mechanics Conference}, The University of Queensland, Brisbane, Australia, 2020.
+    \bibitem{Strouhal} Yue, D. K. P., ``Vortex Shedding and Vortex Induced Vibrations,'' Lecture Notes for 13.021: Marine Hydrodynamics, Massachusetts Institute of Technology, URL: \url{http://web.mit.edu/13.021/demos/lectures/lecture15.pdf}, 2004.
+    \bibitem{Lab1} Borg., A., Lam., B., Latzko, A., ``Wind Tunnel Calibration for Prediction of Testing Conditions,'' \textit{University of Florida}, 2023.
+    \bibitem{DragData} Bruschi, G., Nishioka, T., Tsang, K., Wang, R., ``Drag Coefficient of a Cylinder: A Comparison of Analytical Methods,'' \textit{University of California San Diego}, 2003.
+    \bibitem{HeatTrans} Bergman, T. L., and Lavine, A. S., ``Appendix A: Thermophysical Properties of Matter,'' \textit{Fundamentals of Heat and Mass Transfer}, Wiley, Hoboken, NJ, 2017, p. 911.
+    \bibitem{StrouhalPlot} Smits, A. J., ``Viscous External Flows,'' \textit{A Physical Introduction to Fluid Mechanics}, Princeton Univ., Princeton, NJ, 2013, p. 183.
+    \bibitem{labDoc} Abbitt, J. D., ``Lab 3 - Cylinder - hot-wire-rev2,'' \textit{University of Florida E-Learning} [PDF], URL: \url{https://ufl.instructure.com/courses/480244/files/77543920}, 2023.
+    \bibitem{dragRef} Anderson, J. D., ``Fundamentals of Inviscid, Incompressible Flow,'' \textit{Fundamentals of Aerodynamics}, McGraw-Hill, New York, NY, 2017, pp. 294-295.
 \end{thebibliography}
 
 \end{document}
