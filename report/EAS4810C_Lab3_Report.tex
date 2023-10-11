@@ -54,7 +54,7 @@
 \lhead{Section 11832 Lab 3}
 
 \begin{document}
-\title{Hot Wire Measurements Over a Cylinder}
+\title{Characterizing the Wake Region of a Smooth Cylinder}
 
 \author{\IEEEauthorblockN{\LARGE{Borg, Auston J. \quad Lam, Brandon H. \quad Latzko, Alexander J. \\}}
 \IEEEauthorblockA{
@@ -135,7 +135,7 @@ The calculated Strouhal number was then compared with existing literature to bes
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=3.25in]{Strouhal}
+    \includegraphics[width=3.4in]{Strouhal}
     \caption{Dimensionless shedding frequency (Strouhal number) as a function of Reynolds number~\cite{StrouhalPlot}.}
     \label{fig:strouhal}
 \end{figure}
@@ -165,7 +165,7 @@ After collecting the seventeen data points, the anemometer voltage was taken at 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=3in]{Cylinder}
+    \includegraphics[width=2.9in]{Cylinder}
     \caption{Test section configuration for velocity profile measurement.}
     \label{fig:cylinder}
 \end{figure}
@@ -180,6 +180,7 @@ The measured atmospheric conditions are summarized in Table~\ref{tab:atmCond}.
 \begin{table}[H]
     \centering
     \caption{Atmospheric Conditions}
+    \renewcommand{\arraystretch}{1.105}
     \begin{tabular}{ccc}
     \toprule
     Parameter & Value & Uncertainty ($\pm$) \\ \midrule \midrule
@@ -191,7 +192,7 @@ The measured atmospheric conditions are summarized in Table~\ref{tab:atmCond}.
 \end{table}
 
 The static gauge pressures measured using the pressure transducer were converted into the corresponding fluid velocities.
-The pressures measures, where $P_a$ is ambient pressure and $P_{ts}$ is test section pressure, are plotted against the voltages measured by the hot wire anemometer used during the calibration procedure in Fig.~\ref{fig:cal}.
+The pressures measures, where $P_\text{amb}$ is ambient pressure and $P_{ts}$ is test section pressure, are plotted against the voltages measured by the hot wire anemometer used during the calibration procedure in Fig.~\ref{fig:cal}.
 
 \begin{figure}[H]
     \centering
@@ -208,6 +209,7 @@ The mean voltage at the centerline, top and bottom of the cylinder were also tak
 \begin{table}[H]
     \centering
     \caption{Voltage Profile}
+    \renewcommand{\arraystretch}{1.11}
     \begin{tabular}{cc}
     \toprule
     Height $h$ (cm) & Voltage $V$ (V) \\ \midrule \midrule
@@ -308,14 +310,15 @@ These findings matched previous literature that described how the flow behaves i
 The drag of the cylinder was calculated through the conservation of momentum of a control volume and a numerical integration approximation.
 Using~\eqref{eq:Drag} to numerically integrate over the entire profile, a drag force was found and is tabulated in Table~\ref{tab:Drag}.
 This drag force could then be converted into a coefficient as seen in Table~\ref{tab:Drag} using~\eqref{eq:Coeff}.
-The calculated coefficient of drag comes close to the theoretical coefficient of drag for a cylinder of 1~\cite{dragRef}.
+The calculated coefficient of drag comes close to the theoretical drag coefficient for a cylinder of 1~\cite{dragRef}.
 The error seen between the calculated coefficient and theoretical coefficient could be because of the resolution of the velocity profile.
 By taking more data points, the numerical integration that was performed would be more accurate.
-This would allow the coefficient to better match the expected theoretical coefficient of drag more closely.
+This would allow the coefficient to better match the expected theoretical drag coefficient more closely.
 
 \begin{table}[H]
     \centering
     \caption{Drag on the Cylinder}
+    \renewcommand{\arraystretch}{1.075}
     \begin{tabular}{ccc}
     \toprule
     Parameter & Value & Uncertainty ($\pm$) \\ \midrule \midrule
@@ -327,7 +330,7 @@ This would allow the coefficient to better match the expected theoretical coeffi
 
 \subsection{Velocity Spectra}
 
-To investigate the nature of the vortex shedding, a fast Fourier transform was used to calculate the discrete Fourier transform of the interpolated fluid velocities from the hot wire anemometer. Fig.~\ref{fig:freq2}, \ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show the resulting velocity spectra of the data.
+To investigate the nature of the vortex shedding, a fast Fourier transform was used to take the discrete Fourier transform of the fluid velocities from the hot wire anemometer. Fig.~\ref{fig:freq2}, \ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show the resulting velocity spectra of the data.
 
 \begin{figure}[H]
     \centering
@@ -335,21 +338,20 @@ To investigate the nature of the vortex shedding, a fast Fourier transform was u
     \caption{Velocity spectra when the hot wire anemometer was inline with the center of the cylinder.}
     \label{fig:freq2}
 \end{figure}
-
 \begin{figure}[H]
     \centering
     \input{figures/topSpectra.tex}
     \caption{Velocity spectra when the hot wire anemometer was inline with the top of the cylinder.}
     \label{fig:freq3}
 \end{figure}
-
+\vspace{0.5cm}
 \begin{figure}[H]
     \centering
     \input{figures/insideSpectra.tex}
     \caption{Velocity spectra when the hot wire anemometer was in the flow wake region.}
     \label{fig:freq4}
 \end{figure}
-
+\vspace{-1.5cm}
 \begin{figure}[H]
     \centering
     \input{figures/outsideSpectra.tex}
