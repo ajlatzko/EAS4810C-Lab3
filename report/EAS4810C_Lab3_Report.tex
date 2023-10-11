@@ -29,7 +29,7 @@
 \newlength\fheight
 \newlength\fwidth
 \setlength\fwidth{3.25in}
-\setlength\fheight{0.7\fwidth}
+\setlength\fheight{0.8\fwidth}
 
 \newcommand{\incfig}[1]{%
     \centering
@@ -37,7 +37,7 @@
     \import{./figures/}{#1.pdf_tex}
 }
 
-\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraystretch}{1.3}
 
 \sisetup{per-mode = symbol,
          inter-unit-product = \ensuremath{ { } \cdot { } },
@@ -87,9 +87,9 @@ cylinder, hot wire anemometer, Kármán vortex street, wind tunnel
 Analysis of the flow pattern can provide useful information about the object's flight characteristics such as the behavior of lift and drag.
 When a bluff body is placed in steady uniform flow, the presence of the body disrupts the streamlines and typically causes flow separation behind the body, resulting in a turbulent wake.
 The fluid velocity in the wake region can be characterized by a mean fluid velocity and perturbations that act in a cyclical manner.
-These perturbations can be attributed to vortices in the Kármán vortex street and have an associated frequency, $f$, known as the Strouhal frequency that is associated with the Reynolds number of the flow~\cite{Strouhal}.
-This experiment had the objective of using a calibrated hot wire anemometer to determine the mean velocity profile and turbulent velocity profile in the wake of a cylinder placed in the test section of the wind tunnel.
-Additionally, the velocity spectra at different points in the test section of the wind tunnel was found to determine the vortex shedding frequency and corresponding Strouhal number, as shown by~\eqref{eq:Strouhal}.
+These perturbations can be attributed to vortex shedding, called the Kármán vortex street, and have an associated frequency, $f$. To better quantify the frequency of this vortex shedding, a number called the Strouhal number relates the freestream velocity to the frequency and diameter of the object~\cite{Strouhal}.
+This experiment had the objective of using a hot wire anemometer to determine the mean velocity profile and turbulent velocity profile in the wake of a smooth cylinder placed in the test section of a wind tunnel.
+Additionally, the velocity spectra were found to at different points in the test section of the wind tunnel determine the vortex shedding frequency and corresponding Strouhal number, as shown by~\eqref{eq:Strouhal}.
 
 \begin{equation} \label{eq:Strouhal}
     Sr = \frac{fD}{U_\infty}
@@ -130,13 +130,13 @@ The calculated Strouhal number was then compared with existing literature to bes
 
 \begin{figure}[H]
     \centering
-    %\includegraphics[width=2.7in]{transducerPort}
+    \includegraphics[width=2.7in]{wake}
     \caption{Resulting wake behind a cylindrical body at various Reynolds numbers.}
     \label{fig:wake}
 \end{figure}
 \begin{figure}[H]
     \centering
-    %\includegraphics[width=2.7in]{transducerPort}
+    \includegraphics[width=3.25in]{Strouhal}
     \caption{Dimensionless shedding frequency (Strouhal number) as a function of Reynolds number~\cite{StrouhalPlot}.}
     \label{fig:strouhal}
 \end{figure}
@@ -166,7 +166,7 @@ After collecting the seventeen data points, the anemometer voltage was taken at 
 
 \begin{figure}[H]
     \centering
-    %\includegraphics[width=2.7in]{transducerPort}
+    \includegraphics[width=3in]{Cylinder}
     \caption{Test section configuration for velocity profile measurement.}
     \label{fig:cylinder}
 \end{figure}
@@ -196,7 +196,7 @@ The pressures measures, where $P_a$ is ambient pressure and $P_{ts}$ is test sec
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
+    \input{figures/cal.tex}
     \caption{Hot wire anemometer calibration curve.}
     \label{fig:cal}
 \end{figure}
@@ -261,7 +261,7 @@ With the calibration curve, fluid velocities could be interpolated using the fou
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
+    \input{figures/calCurve.tex}
     \caption{Calibration graph for voltage velocity relation.}
     \label{fig:calCurve}
 \end{figure}
@@ -283,7 +283,7 @@ Due to the relatively low uncertainty in the interpolated velocities, it can be 
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
+    \input{figures/vProfile.tex}
     \caption{Velocity profile behind a cylinder in uniform flow.}
     \label{fig:profile}
 \end{figure}
@@ -299,7 +299,7 @@ These findings matched previous literature that described how the flow behaves i
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
+    \input{figures/vStdDev.tex}
     \caption{The standard deviation of the velocities measured in the test section.}
     \label{fig:deviation}
 \end{figure}
@@ -314,34 +314,46 @@ The error seen between the calculated coefficient and theoretical coefficient co
 By taking more data points, the numerical integration that was performed would be more accurate.
 This would allow the coefficient to better match the expected theoretical coefficient of drag more closely.
 
+\begin{table}[H]
+    \centering
+    \caption{Drag on the Cylinder}
+    \begin{tabular}{ccc}
+    \toprule
+    Parameter & Value & Uncertainty ($\pm$) \\ \midrule \midrule
+    $F_D$ & \qty{0.927}{\newton} & \qty{0.070}{\newton} \\
+    $C_D$ & 0.856 & 0.065 \\ \bottomrule
+    \end{tabular}
+    \label{tab:Drag}
+\end{table}
+
 \subsection{Velocity Spectra}
 
 To investigate the nature of the vortex shedding, a fast Fourier transform was used to calculate the discrete Fourier transform of the interpolated fluid velocities from the hot wire anemometer. Figures~\ref{fig:freq2}, \ref{fig:freq3}, \ref{fig:freq4}, and \ref{fig:freq5} show the resulting velocity spectra of the data.
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
-    \caption{Velocity spectra when the hot wire anemometer was in-line with the center of the cylinder.}
+    \input{figures/centerlineSpectra.tex}
+    \caption{Velocity spectra when the hot wire anemometer was inline with the center of the cylinder.}
     \label{fig:freq2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
-    \caption{Velocity spectra when the hot wire anemometer was in-line with the top of the cylinder.}
+    \input{figures/topSpectra.tex}
+    \caption{Velocity spectra when the hot wire anemometer was inline with the top of the cylinder.}
     \label{fig:freq3}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
+    \input{figures/insideSpectra.tex}
     \caption{Velocity spectra when the hot wire anemometer was in the flow wake region.}
     \label{fig:freq4}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    %\input{figures/calibration.tex}
+    \input{figures/outsideSpectra.tex}
     \caption{Velocity spectra when the hot wire anemometer was outside of the flow wake region.}
     \label{fig:freq5}
 \end{figure}

@@ -1,0 +1,48 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.958\fwidth,
+height=\fheight,
+at={(0\fwidth,0\fheight)},
+xmin=0,
+xmax=3,
+xlabel style={font=\color{white!15!black}},
+xlabel={Standard Deviation of Velocity (m/s)},
+ymin=-10,
+ymax=10,
+ylabel style={font=\color{white!15!black}},
+ylabel={Position (cm)},
+axis background/.style={fill=white},
+axis x line*=bottom,
+axis y line*=left,
+xmajorgrids,
+ymajorgrids
+]
+\addplot [color=black, only marks, mark size=2.5pt, mark=*, mark options={solid, black}, forget plot]
+  table[row sep=crcr]{%
+0.173818062	-8\\
+0.239959547	-7\\
+0.483283962	-6\\
+0.919045562	-5\\
+1.299192436	-4\\
+1.661433296	-3\\
+2.108859546	-2\\
+2.417891131	-1\\
+2.529128388	0\\
+2.351792533	1\\
+1.967515128	2\\
+1.519674248	3\\
+1.136372042	4\\
+0.724403928	5\\
+0.380683268	6\\
+0.222989909	7\\
+0.162576465	8\\
+};
+\end{axis}
+\end{tikzpicture}%
